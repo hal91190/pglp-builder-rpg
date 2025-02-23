@@ -1,0 +1,47 @@
+= PGLP TD - Personnages de JdR
+:stem:
+:icons: font
+
+Le but de cet exercice est d'implémenter une bibliothèque de classes métier pour la gestion de personnages de jeu de rôle (JdR).
+
+NOTE: Les règles détaillées peuvent être trouvées sur le web en https://www.aidedd.org/regles/[français] et en https://dnd.wizards.com/articles/features/basicrules[anglais].
+
+Un personnage possède un nom ainsi que 6 *caractéristiques* : _Force_, _Dextérité_, _Constitution_, _Intelligence_, _Sagesse_ et _Charisme_.
+Chaque caractéristique est associée à une *valeur de caractéristique* comprise entre 2 et 20.
+Pour chaque *valeur de caractéristique*, un *modificateur de caractéristique* est généré et est égal à _-4_ pour une valeur de _2 ou 3_, _-3_ pour une valeur de _4 ou 5_, …, _0_ pour une valeur de _10 ou 11_, …, _+5_ pour une valeur de _20_.
+
+De plus, un personnage possède un certain nombre de *compétences* (_Acrobaties_, _Arcanes_, …) qui peuvent être différentes d'un personnage à l'autre et qui peuvent changer au cours du temps.
+Chaque compétence est associée à une caractéristique (_Acrobaties_ à _Dextérité_, _Arcanes_ à _Intelligence_, …).
+Lorsqu'un personnage maîtrise une compétence, il peut ajouter son *bonus de maîtrise* aux tests avec cette compétence.
+
+CAUTION: Pour chaque question, vous implémenterez les tests JUnit 5 appropriés.
+Aucun programme principal ne vous est demandé : seuls les tests démontreront le bon fonctionnement de vos implémentations.
+
+== Fiche de personnage
+. L'énumération `Ability` représente les caractéristiques possibles (_Strength_, _Dexterity_, _Constitution_, _Intelligence_, _Wisdom_, _Charisma_).
+. La classe `AbilityScore` représente la valeur et le modificateur d'une caractéristique.
+. L'énumération `Skill` représente les compétences (_Acrobatics_, _Arcana_, …).
+. La classe `Character` représentent un personnage.
+Les instances de cette classe seront créées en respectant le pattern `Builder`.
+
+== Instancier des personnages avec le pattern `Builder`
+Par défaut, le personnage doit avoir un nom et des valeurs de caractéristiques générées aléatoirement de la façon suivante.
+
+Chaque caractéristique est générée en tirant 4 valeurs aléatoires entre 1 et 6 dont on conservera la somme des 3 plus élevées.
+Par exemple, pour un tirage de _2, 3, 4, 5_, on obtiendra la valeur _12 = 5 + 4 + 3_.
+Comme cette méthode peut générer des personnages très déséquilibrés, le processus devra être répété tant que la somme des valeurs de caractéristique n'est pas comprise entre 60 et 80.
+
+. Implémentez le constructeur du _Builder_ en respectant le processus décrit ci-dessus.
+L'ordre de préférence sur les caractéristiques sera passé en paramètre du constructeur.
+Les valeurs seront attribuées de façon décroissante en respectant cet ordre.
+Par exemple, si la caractéristique _Force_ est préférée, elle recevra la plus forte valeur générée.
+. Implémentez la méthode `nonRandomAbilities` qui attribuera les valeurs _15, 14, 13, 12, 10, 8_ selon l'ordre de préférence en paramètre.
+. Implémentez une méthode `setAbility` qui permettra d'attribuer une valeur spécifique à une caractéristique.
+. Implémentez une méthode `setProficiencyBonus` qui permettra de fixer le bonus de maîtrise du personnage.
+
+== Compléter la classe `Character`
+. Définissez des accesseurs pour récupérer les valeurs et modificateurs de caractéristique (`AbilityScore get(Ability ability)`).
+. Définissez la méthode (`getProficiencyBonusIn`) retournant le bonus pour une compétence donnée en paramètre.
++
+Ce bonus est égal à la somme du modificateur de caractéristique associé à la compétence et du bonus de maîtrise si la compétence est définie pour ce personnage.
+Si le personnage ne maîtrise pas la compétence, le bonus de compétence est simplement égal au modificateur de caractéristique associé à la compétence.
