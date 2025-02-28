@@ -14,8 +14,7 @@ De plus, un personnage possède un certain nombre de *compétences* (_Acrobaties
 Chaque compétence est associée à une caractéristique (_Acrobaties_ à _Dextérité_, _Arcanes_ à _Intelligence_, …).
 Lorsqu'un personnage maîtrise une compétence, il peut ajouter son *bonus de maîtrise* aux tests avec cette compétence.
 
-CAUTION: Pour chaque question, vous implémenterez les tests JUnit 5 appropriés.
-Aucun programme principal ne vous est demandé : seuls les tests démontreront le bon fonctionnement de vos implémentations.
+CAUTION: Aucun programme principal ne vous est demandé : seuls les tests démontreront le bon fonctionnement de vos implémentations.
 
 == Fiche de personnage
 . L'énumération `Ability` représente les caractéristiques possibles (_Strength_, _Dexterity_, _Constitution_, _Intelligence_, _Wisdom_, _Charisma_).
